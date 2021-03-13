@@ -24,9 +24,8 @@ INSERT INTO `vehicle` (`id`, `brand`, `model`, `description`, `price`, `number_p
 ALTER TABLE `vehicle`
   ADD PRIMARY KEY (`id`),
   ADD KEY `vehicle_type_id` (`vehicle_type_id`),
-  ADD KEY `rental_point_id` (`rental_point_id`),
-  ADD KEY `brand` (`brand`);
-
+  ADD KEY `rental_point_id` (`rental_point_id`);
+  
 ALTER TABLE `vehicle`
   ADD CONSTRAINT `vehicle_ibfk_1` FOREIGN KEY (`vehicle_type_id`) REFERENCES `vehicle_type` (`id`),
   ADD CONSTRAINT `vehicle_ibfk_2` FOREIGN KEY (`rental_point_id`) REFERENCES `rental_point` (`id`);
