@@ -25,6 +25,5 @@ INSERT INTO `address` (`id`, `street_name`, `street_number`, `city`, `country`, 
 (15, 'Dayton', '6', 'Frederiksberg', 'Denmark', 1823);
 
 ALTER TABLE `address`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `country` (`country`);
+  ADD PRIMARY KEY (`id`);
 COMMIT;
