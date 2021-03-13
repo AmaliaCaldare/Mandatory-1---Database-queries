@@ -1,5 +1,5 @@
 # Mandatory-1---Database-quries
 
-This are the queries we used for the mandatory 1.
-Each file contains queries for creating the tables and populating them with data.
+These are the queries we used for the mandatory 1.
+Each file contains queries for creating the tables and populating them with data, as well as the views, functions and procedures.
 
