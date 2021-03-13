@@ -1,12 +1,12 @@
 DELIMITER $$
-CREATE DEFINER=`sql11398214`@`%` PROCEDURE `GetRentalInfo` (IN `customerId` INT)  NO SQL
+CREATE DEFINER=`sql11398214`@`%` PROCEDURE `GetRentalInfo` (IN `rentalId` INT)  NO SQL
 SELECT customer.first_name, customer.last_name, customer.email, rental.rental_start, rental.rental_end, vehicle.brand, vehicle.model, vehicle.number_plate, contact_info.phone_number, contact_info.email as company_email, contact_info.opening_time, contact_info.closing_time, address.street_name, address.street_number, address.city, address.country, address.postal_code 
 FROM customer INNER JOIN rental ON customer.id = rental.customer_id 
 INNER JOIN vehicle ON rental.vehicle_id = vehicle.id 
 INNER JOIN rental_point ON vehicle.rental_point_id = rental_point.id 
 INNER JOIN contact_info ON rental_point.contact_info_id = contact_info.id 
 INNER JOIN address ON rental_point.address_id = address.id
- WHERE customer.id=customerId$$
+ WHERE rental.id=rentalId$$
 
 CREATE DEFINER=`sql11398214`@`%` PROCEDURE `GetRentalPrice` (IN `rentalId` INT, OUT `rentalPrice` DOUBLE)  BEGIN
 	DECLARE rstart DATE;
@@ -24,14 +24,6 @@ CREATE DEFINER=`sql11398214`@`%` PROCEDURE `GetRentalPrice` (IN `rentalId` INT, 
     SET rentalPrice = total_price(rstart,rend,vprice);
 END$$
 
-SELECT customer.first_name, customer.last_name, customer.email, rental.rental_start, rental.rental_end, vehicle.brand, vehicle.model, vehicle.number_plate, contact_info.phone_number, contact_info.email as company_email, contact_info.opening_time, contact_info.closing_time, address.street_name, address.street_number, address.city, address.country, address.postal_code 
-FROM customer INNER JOIN rental ON customer.id = rental.customer_id 
-INNER JOIN vehicle ON rental.vehicle_id = vehicle.id 
-INNER JOIN rental_point ON vehicle.rental_point_id = rental_point.id 
-INNER JOIN contact_info ON rental_point.contact_info_id = contact_info.id 
-INNER JOIN address ON rental_point.address_id = address.id
- WHERE customer.id=customerId;
- 
 CREATE DEFINER=`sql11398214`@`%` FUNCTION `total_price` (`start_date` DATE, `end_date` DATE, `price` DOUBLE) RETURNS DOUBLE BEGIN
 	DECLARE days INT;
     DECLARE end_price DOUBLE;
