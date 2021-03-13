@@ -42,21 +42,15 @@ END$$
 
 DELIMITER ;
 
-CREATE TABLE `customers_de` (
-`first_name` varchar(50)
-,`last_name` varchar(50)
-,`email` varchar(50)
-,`phone_number` int(20)
-,`licence_num` int(20)
-);
+CREATE VIEW customers_de AS 
+SELECT customer.first_name, customer.last_name, customer.email, customer.phone_number, customer.licence_num
+ FROM customer
+ JOIN address ON customer.address_id = address.id
+ WHERE address.country="Germany";
 
-CREATE TABLE `customers_dk` (
-`first_name` varchar(50)
-,`last_name` varchar(50)
-,`email` varchar(50)
-,`phone_number` int(20)
-,`licence_num` int(20)
-);
-
-DROP TABLE IF EXISTS `customers_de`;
-DROP TABLE IF EXISTS `customers_dk`;
+CREATE VIEW customers_dk AS 
+SELECT customer.first_name, customer.last_name, customer.email, customer.phone_number, customer.licence_num
+ FROM customer
+ JOIN address ON customer.address_id = address.id
+ WHERE address.country="Denmark";
+ 
